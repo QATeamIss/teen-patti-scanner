@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useCamera } from '../hooks/useCamera';
 import { generateDeck, getHandInfo, calculateWinChance, HandType, getHandComparison } from '../logic/teenPatti';
-import type { Card, Rank, Suit } from '../logic/teenPatti';
+import type { Card } from '../logic/teenPatti';
 import { CardUI } from './CardUI';
 import { ResultPanel } from './ResultPanel';
 import { ManualEntry } from './ManualEntry';
-import { Camera, RefreshCw, X, Users, PlusCircle, Trophy, Info } from 'lucide-react';
+import { Camera, RefreshCw, X, PlusCircle, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
