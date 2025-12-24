@@ -5,6 +5,7 @@ import type { Card } from '../logic/teenPatti';
 import { CardUI } from './CardUI';
 import { ResultPanel } from './ResultPanel';
 import { ManualEntry } from './ManualEntry';
+import { PhotoScan } from './PhotoScan';
 import { Camera, RefreshCw, X, PlusCircle, Trophy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
@@ -14,6 +15,7 @@ export const ScannerView: React.FC = () => {
     const [detectedCards, setDetectedCards] = useState<Card[]>([]);
     const [isScanning, setIsScanning] = useState(false);
     const [isManualEntryOpen, setIsManualEntryOpen] = useState(false);
+    const [isPhotoScanOpen, setIsPhotoScanOpen] = useState(false);
     const [allHands, setAllHands] = useState<{ cards: Card[], id: number }[]>([]);
 
     const handleScanOrAdd = (cards: Card[]) => {
@@ -40,33 +42,7 @@ export const ScannerView: React.FC = () => {
     };
 
     const handleCameraClick = () => {
-        if (!stream) {
-            alert("Please start the camera first by clicking the red X/Camera icon at the bottom.");
-            return;
-        }
-
-        // Mock Scan Logic: Ensure some "good" hands appear occasionally
-        const roll = Math.random();
-        let cards: Card[];
-        const fullDeck = generateDeck(3);
-
-        if (roll > 0.8) {
-            // Force a Trail or Sequence
-            const rank = (['A', 'K', 'Q', 'J'] as const)[Math.floor(Math.random() * 4)];
-            if (Math.random() > 0.5) {
-                // Trail
-                cards = [{ rank, suit: 'H' }, { rank, suit: 'D' }, { rank, suit: 'S' }];
-            } else {
-                // Sequence (if possible)
-                if (rank === 'A') cards = [{ rank: 'A', suit: 'H' }, { rank: 'K', suit: 'D' }, { rank: 'Q', suit: 'S' }];
-                else if (rank === 'K') cards = [{ rank: 'K', suit: 'H' }, { rank: 'Q', suit: 'D' }, { rank: 'J', suit: 'S' }];
-                else cards = fullDeck.sort(() => Math.random() - 0.5).slice(0, 3);
-            }
-        } else {
-            cards = [...fullDeck].sort(() => Math.random() - 0.5).slice(0, 3);
-        }
-
-        handleScanOrAdd(cards);
+        setIsPhotoScanOpen(true);
     };
 
     const reset = () => {
@@ -146,7 +122,12 @@ export const ScannerView: React.FC = () => {
             {/* Main Analysis Area */}
             <div className="flex-1 flex flex-col items-center justify-center z-10 w-full px-6 gap-6">
                 <AnimatePresence mode="wait">
-                    {isManualEntryOpen ? (
+                    {isPhotoScanOpen ? (
+                        <PhotoScan
+                            onComplete={handleScanOrAdd}
+                            onCancel={() => setIsPhotoScanOpen(false)}
+                        />
+                    ) : isManualEntryOpen ? (
                         <ManualEntry
                             onComplete={handleScanOrAdd}
                             onCancel={() => setIsManualEntryOpen(false)}
