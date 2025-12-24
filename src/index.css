@@ -130,6 +130,76 @@ h3,
   color: #ffffff;
 }
 
+/* Mobile Responsive Adjustments */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+
+  .glass-panel {
+    border-radius: 16px;
+  }
+
+  .glass-button {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .scan-overlay {
+    width: 220px;
+    height: 300px;
+  }
+
+  /* Reduce padding on mobile */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+  body {
+    font-size: 13px;
+  }
+
+  .glass-button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .scan-overlay {
+    width: 200px;
+    height: 280px;
+  }
+}
+
+/* Prevent text size adjustment on iOS */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Improve touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+
+  button,
+  a,
+  input,
+  select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
