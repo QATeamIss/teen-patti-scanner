@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCamera } from '../hooks/useCamera';
-import { generateDeck, getHandInfo, calculateWinChance, HandType } from '../logic/teenPatti';
+import { generateDeck, getHandInfo, calculateWinChance, HandType, getHandComparison } from '../logic/teenPatti';
 import type { Card, Rank, Suit } from '../logic/teenPatti';
 import { CardUI } from './CardUI';
 import { ResultPanel } from './ResultPanel';
