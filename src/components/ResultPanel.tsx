@@ -9,14 +9,7 @@ interface ResultPanelProps {
     winChance: number;
 }
 
-const HandTypeLabels: Record<HandTypeValue, string> = {
-    [HandType.Trail]: 'Trail / Trio',
-    [HandType.PureSequence]: 'Pure Sequence',
-    [HandType.Sequence]: 'Sequence',
-    [HandType.Color]: 'Color / Flush',
-    [HandType.Pair]: 'Pair',
-    [HandType.HighCard]: 'High Card'
-};
+
 
 const HandRanks: Record<HandTypeValue, number> = {
     [HandType.Trail]: 1,
